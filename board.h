@@ -6,6 +6,8 @@
 
 class AcademicBuilding;
 
+// heeeeeey
+
 class Board {
 	 // can we put the const 40 here instead?
 //	Ownable *ownables[28];
