@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Gym::Gym(string name) : Ownable(name) {};
+Gym::Gym(string name) : Ownable(name, 100) {}; // how much does a gym cost?
 
 int Gym::rent(){
 	cout << "Please roll again to determine your membership fees." << endl;

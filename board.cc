@@ -24,8 +24,8 @@ void Board::getCurrentRoll(int roll1, int roll2) {
 void Board::getTileAction(){
   BoardTile *currentTile = tiles[currentPlayer->getPos()];
   cout << endl << "You've landed on " << currentTile->name << "!" << endl;
-  if(currentTile->ownable){
-    Ownable *ownable = dynamic_cast<Ownable *>(currentTile);
+  if(currentTile->ownable) {
+    Ownable *ownable = dynamic_cast<Ownable *>(currentTile); // might not be working because it's an academic building..
     if(ownable->owner == currentPlayer){
       cout << "You already own this property." << endl;
     } else if(ownable->owner != NULL){
@@ -41,7 +41,7 @@ void Board::getTileAction(){
       }
     } else if(ownable->owner == NULL){
       int price = ownable->getPurchasePrice();
-      cout << "Would you like to buy this property? It costs $" << price << endl;
+      cout << "Would you like to buy this property? It costs $" << price << "." << endl;
       cout << "(y/n)" << endl;
       char response;
       cin >> response;
@@ -51,21 +51,28 @@ void Board::getTileAction(){
         //check if can pay?
         currentPlayer->pay(price);
         ownable->owner = currentPlayer;
-        cout << "Congratulations! You are the brand new owner of " << ownable->name << endl;
+        string name = ownable->getName();
+        cout << "Congratulations! You are the brand new owner of " << name << "!" << endl;
 
         Gym *gym = dynamic_cast<Gym *>(ownable);
         AcademicBuilding *ab = dynamic_cast<AcademicBuilding *>(ownable);
-        if(gym){
-        } else if(ab->isMonopoly()){
+        if(ab && ab->isMonopoly()){
           cout << "Even better, you now own a monopoly. Feel free to start making improvements!" << endl;
         }
       }
     }
+  } else {
+    cout << "We don't know what happens yet." << endl;
   }
 }
 
 void Board::changeTurn(void) {
-	currentPlayerIndex++;
+  if(currentPlayerIndex == numPlayers){
+    currentPlayerIndex = 0;
+  } else {
+    currentPlayerIndex++;
+  }
+	
   currentPlayer = players[currentPlayerIndex];
 
 }
@@ -80,6 +87,7 @@ int Board::getTilePrice(Ownable *tile){
 
 void Board::addPlayer(Player * newPlayer) {
 	players[numPlayers] = newPlayer;
+  numPlayers++;
   if(currentPlayer == NULL){
     currentPlayer = newPlayer;
   }
@@ -87,7 +95,8 @@ void Board::addPlayer(Player * newPlayer) {
 
 Board::Board(void) {
   tiles[0] = new Unownable("COLLECT OSAP");
-  tiles[1] = new AcademicBuilding("AL", 40, 50, "Arts1", 2, 10, 30, 90, 160, 250);
+  tiles[1] = new AcademicBuilding("AL", 40, 50, "Arts1", 2, 10, 30, 90, 160, 250); // purchase price is being set to 0 :(
+  // fixed it!
   tiles[2] = new Unownable("SLC");
   tiles[3] = new AcademicBuilding("ML", 60, 50, "Arts1", 4, 20, 60, 180, 320, 450);
   tiles[4] = new Unownable("TUITION");
@@ -129,6 +138,7 @@ Board::Board(void) {
   td = new TextDisplay();
   currentPlayerIndex = 0;
   currentPlayer = NULL;
+  numPlayers = 0; 
 }
 
 // initialize facultyMembers for all deez bitchez

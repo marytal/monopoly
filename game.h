@@ -8,7 +8,7 @@ class Game {
 	bool testingMode;
 	int numPlayers;
 	int playerTurn;
-	Player **players;
+	Player *players[8];
 	void getCommand(std::string fullCommand);
 	public:
 		Game(void);

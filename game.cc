@@ -20,8 +20,9 @@ void Game::initPlayers(void) {
 	char symbol;
 	string name;
 	cout << "How many players will be playing?" << endl;
-	cin >> numPlayers;
-	players = new Player* [numPlayers];
+	cin >> _numPlayers;
+	numPlayers = _numPlayers;
+
 	cout << "Here is the list of possible symbols. " << endl;
 	cout << "G B D P S $ L T" << endl;
 	cout << "Please type in the player name and " << endl;
@@ -31,6 +32,7 @@ void Game::initPlayers(void) {
 		players[i] = new Player(name, symbol);
 		players[i]->setIndex(i);
 		gameBoard->addPlayer(players[i]);
+
 	}
 	cout << "All the players have been added!" << endl;
 	cout << "Now... LETS GET RICH!!" << endl;
@@ -54,6 +56,7 @@ void Game::runGame(void) {
 		getCommand(fullCommand);
 	}
 }
+
 
 void Game::loadFile(string file) {
 	// We need to have something that checks if the file
@@ -93,10 +96,15 @@ void Game::getCommand(string fullCommand) {
 			roll2 = rand() % 6 + 1;
 			cout << roll1 << " " << roll2 << endl;
 			gameBoard->getCurrentRoll(roll1, roll2);
+			cout << "Write 'next' to switch to the next player." << endl;
 		}
 	} else if(command == "next") {
-		playerTurn++;
-		playerTurn = playerTurn % numPlayers;
+		if(playerTurn == numPlayers){
+			playerTurn = 0;
+		} else {
+			playerTurn++;
+		}
+		
 		cout << "It is now " << players[playerTurn]->getName() << "'s turn!" << endl;
 		gameBoard->changeTurn();
 	} else if(command == "trade") {

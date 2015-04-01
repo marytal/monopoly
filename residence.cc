@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Residence::Residence(string name) : Ownable(name) {};
+Residence::Residence(string name) : Ownable(name, 100) {}; // how much do the residences cost?
 
 int Residence::rent(){
 	//. do stuff

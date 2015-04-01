@@ -16,6 +16,8 @@
 #include "residence.h"
 #include "academicbuilding.h"
 
+// only one player? Set a minimum - at least two players. 
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -41,6 +43,9 @@ int main(int argc, char* argv[]) {
 	}
 	g.initPlayers();	
 	g.runGame();
+
+
+
 /*
 	string fullCommand;
 	while(getline(cin, fullCommand)) {

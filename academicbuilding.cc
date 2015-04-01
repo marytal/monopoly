@@ -6,7 +6,7 @@ AcademicBuilding::AcademicBuilding(string name, int purchasePrice, int improveme
 Ownable(name, false, -1, purchasePrice, false, purchasePrice), improvements(0), 
 improvementPrice(improvementPrice), faculty(faculty), rent(rent) {};
 */
-AcademicBuilding::AcademicBuilding(string name, int purchsePrice, int improvementPrice, string faculty, int rentbase, int rent1, int rent2, int rent3, int rent4, int rent5):
+AcademicBuilding::AcademicBuilding(string name, int purchasePrice, int improvementPrice, string faculty, int rentbase, int rent1, int rent2, int rent3, int rent4, int rent5):
 	Ownable(name, false, NULL, purchasePrice, false, purchasePrice), improvements(0), improvementPrice(improvementPrice), faculty(faculty) {
 	rent_array[0] = rentbase;
 	rent_array[1] = rentbase * 2;
@@ -37,10 +37,10 @@ int AcademicBuilding::rent(void) {
 
 bool AcademicBuilding::isMonopoly(){
 
-	for(int i = 0; i < 3; i++){
-		if(facultyMembers[i]->owner != owner){
-			return false;
-		}
-	}
+	// for(int i = 0; i < 3; i++){
+	// 	if(facultyMembers[i]->owner != owner){
+	// 		return false;
+	// 	}
+	// }
 	return true;
 }
