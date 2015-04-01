@@ -67,7 +67,7 @@ void Board::getTileAction(){
 }
 
 void Board::changeTurn(void) {
-  if(currentPlayerIndex == numPlayers){
+  if(currentPlayerIndex == numPlayers - 1){
     currentPlayerIndex = 0;
   } else {
     currentPlayerIndex++;
@@ -88,6 +88,7 @@ int Board::getTilePrice(Ownable *tile){
 void Board::addPlayer(Player * newPlayer) {
 	players[numPlayers] = newPlayer;
   numPlayers++;
+  cout << "Players: " << numPlayers << endl;
   if(currentPlayer == NULL){
     currentPlayer = newPlayer;
   }

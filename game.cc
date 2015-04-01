@@ -10,6 +10,7 @@ using namespace std;
 Game::Game(void) {
 	gameBoard = new Board();
 	testingMode = false;
+	playerTurn = 0;
 }
 
 void Game::testingON(void) {
@@ -20,8 +21,8 @@ void Game::initPlayers(void) {
 	char symbol;
 	string name;
 	cout << "How many players will be playing?" << endl;
-	cin >> _numPlayers;
-	numPlayers = _numPlayers;
+
+	cin >> numPlayers;
 
 	cout << "Here is the list of possible symbols. " << endl;
 	cout << "G B D P S $ L T" << endl;
@@ -99,7 +100,7 @@ void Game::getCommand(string fullCommand) {
 			cout << "Write 'next' to switch to the next player." << endl;
 		}
 	} else if(command == "next") {
-		if(playerTurn == numPlayers){
+		if(playerTurn == numPlayers - 1){
 			playerTurn = 0;
 		} else {
 			playerTurn++;
