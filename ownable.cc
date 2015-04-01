@@ -24,13 +24,11 @@ void Ownable::unmortgage(void) {
 }
 
 int Ownable::getPurchasePrice(void) {
-  cout << "Purchase Price: " << purchasePrice << endl;
 	return purchasePrice;
 }
 
 string Ownable::getName(void) {
-  cout << name << "yay" << endl;
-  return name;
+  return name; // not working..
 }
 
 

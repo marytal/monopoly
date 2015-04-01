@@ -16,7 +16,13 @@
 #include "residence.h"
 #include "academicbuilding.h"
 
-// only one player? Set a minimum - at least two players. 
+// TO DO:
+// only one player? Set a minimum - at least two players.
+// fix name problem
+// assign neighbours
+// auction
+// add proper purchasePrice for residences/gyms
+
 
 using namespace std;
 

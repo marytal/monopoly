@@ -8,7 +8,6 @@
 
 const string trolluser = "Stop trying to break the game. -_-";
 
-// At the start of every turn just put the next player in the current player instead of calling the players array all the time
 
 void Board::getCurrentRoll(int roll1, int roll2) {
   roll1 = roll1;
@@ -32,7 +31,7 @@ void Board::getTileAction(){
       Player *tileOwner = ownable->owner;
       int rent = ownable->rent();
       if(currentPlayer->canPay(rent)){
-        cout << "Please pay $" << rent  << " to " << tileOwner->getName() << "." << endl;
+        cout << "You've paid $" << rent  << " to " << tileOwner->getName() << " for landing on his/her property." << endl;
         currentPlayer->pay(rent);
         tileOwner->getPaid(rent);
         
@@ -41,6 +40,11 @@ void Board::getTileAction(){
       }
     } else if(ownable->owner == NULL){
       int price = ownable->getPurchasePrice();
+      // if(!currentPlayer->canPay(price)){
+      //   cout << "You cannot afford this property at this time." << endl;
+      //   return;
+      // }
+      
       cout << "Would you like to buy this property? It costs $" << price << "." << endl;
       cout << "(y/n)" << endl;
       char response;
@@ -52,7 +56,7 @@ void Board::getTileAction(){
         currentPlayer->pay(price);
         ownable->owner = currentPlayer;
         string name = ownable->getName();
-        cout << "Congratulations! You are the brand new owner of " << name << "!" << endl;
+        cout << "Congratulations! You are the brand new owner of " << name << "!" << endl; // name not working
 
         Gym *gym = dynamic_cast<Gym *>(ownable);
         AcademicBuilding *ab = dynamic_cast<AcademicBuilding *>(ownable);
@@ -88,7 +92,6 @@ int Board::getTilePrice(Ownable *tile){
 void Board::addPlayer(Player * newPlayer) {
 	players[numPlayers] = newPlayer;
   numPlayers++;
-  cout << "Players: " << numPlayers << endl;
   if(currentPlayer == NULL){
     currentPlayer = newPlayer;
   }
