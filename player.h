@@ -33,6 +33,7 @@ class Player {
 		void setPos(int newPos);
 		int getPos(void);
 		char getSymbol(void);
+		int getBalance(void);
 };
 
 #endif

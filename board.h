@@ -9,6 +9,7 @@ class AcademicBuilding;
 // heeeeeey
 
 class Board {
+
 	 // can we put the const 40 here instead?
 //	Ownable *ownables[28];
 	int roll1;
@@ -42,9 +43,11 @@ class Board {
 		void unmortgage(string property);
 		void changeTurn(void);
 		void getTileAction();
+		void auction(BoardTile *tile);
 };
 
 void makeFaculty(BoardTile *first, BoardTile *second, BoardTile *third);
+
 
 
 #endif

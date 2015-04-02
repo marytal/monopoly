@@ -73,3 +73,7 @@ void Player::printAssets(void) {
 	cout << cash << " ";
 	cout << symbol << endl;
 }
+
+int Player::getBalance(void) {
+  return cash;
+}

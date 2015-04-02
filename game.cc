@@ -13,6 +13,7 @@ Game::Game(void) {
 	playerTurn = 0;
 }
 
+
 void Game::testingON(void) {
 	testingMode = true;
 }

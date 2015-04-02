@@ -6,6 +6,8 @@
 #include "residence.h"
 #include "player.h"
 
+#include <sstream>
+
 const string trolluser = "Stop trying to break the game. -_-";
 
 
@@ -13,6 +15,9 @@ void Board::getCurrentRoll(int roll1, int roll2) {
   roll1 = roll1;
   roll2 = roll2;
   int newPos = currentPlayer->getPos() + roll1 + roll2;
+  if(newPos > 39){ // greater or equals?
+    newPos = newPos % 40;
+  }
   currentPlayer->setPos(newPos);
   td->notify(newPos, currentPlayer->getSymbol());
   cout << *td << endl;
@@ -20,20 +25,82 @@ void Board::getCurrentRoll(int roll1, int roll2) {
   getTileAction();
 }
 
+void Board::auction(BoardTile *tile){
+  // what if no one bids??? Undefined behaviour? No one gets the property?
+
+  int _currentPlayerIndex = currentPlayerIndex + 1;
+  Player **bidders = players; // how to copy the array of players to the heap...
+  int highest_bid = 1;
+  int player_bid = 0;
+  int playersInRunning = numPlayers;
+  string player_input;
+  cout << "Let's start the bidding." << endl;
+
+
+  while(true){
+
+    if(playersInRunning == 1){
+      _currentPlayerIndex--;
+      break;
+    }
+
+    if(bidders[_currentPlayerIndex] != NULL){
+
+      cout << bidders[_currentPlayerIndex]->getName() << ", the current bid is at $" << highest_bid << 
+      ". Input an integer higher than the current bid or enter 'w' to withddraw." << endl;
+      cin >> player_input;
+      stringstream ss(player_input);
+      if(ss >> player_bid){
+        if(player_bid <= highest_bid){
+          cout << "That is not a valid bid. You are withdrawn for being silly." << endl;
+          bidders[_currentPlayerIndex] = NULL;
+          playersInRunning--;
+        } else {
+          highest_bid = player_bid;
+          cout << "Thank you for your interest and good luck." << endl;
+        }
+      } else {
+        cout << "Very well, your loss." << endl;
+        bidders[_currentPlayerIndex] = NULL;
+        playersInRunning--;
+      }
+
+    }
+
+    _currentPlayerIndex++;
+
+  }
+
+  Player *winner = players[_currentPlayerIndex];
+
+  cout << "Congratulations, " << winner->getName() << "! You are now the proud owner of " <<
+  tile->name << "!" << endl;
+  cout << "You have paid $" << highest_bid << " to the bank." << endl; 
+
+  Ownable *ownable = dynamic_cast<Ownable *>(tile);
+  ownable->owner = winner;
+  winner->pay(highest_bid);
+
+
+
+
+}
+
 void Board::getTileAction(){
   BoardTile *currentTile = tiles[currentPlayer->getPos()];
   cout << endl << "You've landed on " << currentTile->name << "!" << endl;
   if(currentTile->ownable) {
-    Ownable *ownable = dynamic_cast<Ownable *>(currentTile); // might not be working because it's an academic building..
+    Ownable *ownable = dynamic_cast<Ownable *>(currentTile);
     if(ownable->owner == currentPlayer){
       cout << "You already own this property." << endl;
     } else if(ownable->owner != NULL){
       Player *tileOwner = ownable->owner;
       int rent = ownable->rent();
       if(currentPlayer->canPay(rent)){
-        cout << "You've paid $" << rent  << " to " << tileOwner->getName() << " for landing on his/her property." << endl;
+        cout << "You've paid $" << rent  << " to " << tileOwner->getName() << " for landing on his/her property." << endl;  
         currentPlayer->pay(rent);
         tileOwner->getPaid(rent);
+        cout << "You now have $" << currentPlayer->getBalance() << " in your account." << endl;
         
       } else {
         // do you want to mortgage something? / bankrupt!
@@ -46,17 +113,18 @@ void Board::getTileAction(){
       // }
       
       cout << "Would you like to buy this property? It costs $" << price << "." << endl;
+      cout << "You currently have $" << currentPlayer->getBalance() << " in your account." << endl;  
       cout << "(y/n)" << endl;
       char response;
       cin >> response;
       if(response == 'n'){
-        // start auction.
+        auction(currentTile);
+
       } else {
         //check if can pay?
         currentPlayer->pay(price);
         ownable->owner = currentPlayer;
-        string name = ownable->getName();
-        cout << "Congratulations! You are the brand new owner of " << name << "!" << endl; // name not working
+        cout << "Congratulations! You are the brand new owner of " << currentTile->name << "!" << endl; // name not working
 
         Gym *gym = dynamic_cast<Gym *>(ownable);
         AcademicBuilding *ab = dynamic_cast<AcademicBuilding *>(ownable);
