@@ -44,6 +44,9 @@ class Board {
 		void getTileAction();
 };
 
+void makeFaculty(BoardTile *first, BoardTile *second, BoardTile *third);
+
+
 #endif
 
 

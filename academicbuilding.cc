@@ -17,6 +17,11 @@ AcademicBuilding::AcademicBuilding(string name, int purchasePrice, int improveme
 	rent_array[6] = rent5;
 }
 
+void AcademicBuilding::addFaculty(AcademicBuilding *first, AcademicBuilding *second){
+  facultyMembers[0] = first;
+  facultyMembers[1] = second;
+}
+
 void AcademicBuilding::improve(void) {
 	improvements++;
 	totalPrice += improvementPrice;
@@ -37,10 +42,13 @@ int AcademicBuilding::rent(void) {
 
 bool AcademicBuilding::isMonopoly(){
 
-	// for(int i = 0; i < 3; i++){
-	// 	if(facultyMembers[i]->owner != owner){
-	// 		return false;
-	// 	}
-	// }
-	return false;
+	for(int i = 0; i < 2; i++){
+		if(facultyMembers[i] == NULL){
+			return true;
+		}
+		if(facultyMembers[i]->owner != owner){
+			return false;
+		}
+	}
+	return true;
 }

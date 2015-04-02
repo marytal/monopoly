@@ -97,48 +97,70 @@ void Board::addPlayer(Player * newPlayer) {
   }
 }
 
+void makeFaculty(BoardTile *first, BoardTile *second, BoardTile *third){
+  AcademicBuilding *_first = dynamic_cast<AcademicBuilding *>(first);
+  AcademicBuilding *_second = dynamic_cast<AcademicBuilding *>(second);
+  AcademicBuilding *_third = dynamic_cast<AcademicBuilding *>(third);
+
+
+  _first->addFaculty(_second, _third);
+  _second->addFaculty(_first, _third);
+  if(_third){
+    _third->addFaculty(_first, _second);
+  }
+
+}
+
+
 Board::Board(void) {
   tiles[0] = new Unownable("COLLECT OSAP");
-  tiles[1] = new AcademicBuilding("AL", 40, 50, "Arts1", 2, 10, 30, 90, 160, 250); // purchase price is being set to 0 :(
-  // fixed it!
+  tiles[1] = new AcademicBuilding("AL", 40, 50, "Arts1", 2, 10, 30, 90, 160, 250);
   tiles[2] = new Unownable("SLC");
   tiles[3] = new AcademicBuilding("ML", 60, 50, "Arts1", 4, 20, 60, 180, 320, 450);
+  makeFaculty(tiles[1], tiles[3], NULL);
   tiles[4] = new Unownable("TUITION");
   tiles[5] = new Residence("MKV");
   tiles[6] = new AcademicBuilding("ECH", 100, 50, "Arts2", 6, 30, 90, 270, 400, 550);
   tiles[7] = new Unownable("NEEDLES HALL");
   tiles[8] = new AcademicBuilding("PAS", 100, 50, "Arts2", 6, 30, 90, 270, 400, 550);
   tiles[9] = new AcademicBuilding("HH", 120, 50, "Arts2", 8, 40, 100, 300, 450, 600);
+  makeFaculty(tiles[6], tiles[8], tiles[9]);
   tiles[10] = new Unownable("DC Tims Line");
   tiles[11] = new AcademicBuilding("RCH", 140, 100, "Eng", 10, 50, 150, 450, 625, 750);
   tiles[12] = new Gym("PAC");
   tiles[13] = new AcademicBuilding("DWE", 140, 100, "Eng", 10, 50, 150, 450, 625, 750);
   tiles[14] = new AcademicBuilding("CPH", 160, 100, "Eng", 12, 60, 180, 500, 700, 900);
+  makeFaculty(tiles[11], tiles[13], tiles[14]);
   tiles[15] = new Residence("UWP");
   tiles[16] = new AcademicBuilding("LHI", 180, 100, "Health", 14, 70, 200, 550, 750, 950);
   tiles[17] = new Unownable("SLC");
   tiles[18] = new AcademicBuilding("BMH", 180, 100, "Health", 14, 70, 200, 550, 750, 950);
   tiles[19] = new AcademicBuilding("OPT", 200, 100, "Health", 16, 80, 220, 600, 800, 1000);
+  makeFaculty(tiles[16], tiles[18], tiles[19]);
   tiles[20] = new Unownable("Goose Nesting");
   tiles[21] = new AcademicBuilding("EV1", 220, 150, "Env", 18, 90, 250, 700, 875, 1015);
   tiles[22] = new Unownable("NEEDLES HALL");
   tiles[23] = new AcademicBuilding("EV2", 220, 150, "Env", 18, 90, 250, 700, 875, 1015);
   tiles[24] = new AcademicBuilding("EV3", 240, 150, "Env", 20, 100, 300, 750, 925, 1100);
+  makeFaculty(tiles[21], tiles[23], tiles[24]);
   tiles[25] = new Residence("V1");
   tiles[26] = new AcademicBuilding("PHYS", 260, 150, "Sci1", 22, 110, 330, 800, 975, 1150);
   tiles[27] = new AcademicBuilding("B1", 260, 150, "Sci1", 22, 110, 330, 800, 975, 1150);
   tiles[28] = new Gym("CIF");
   tiles[29] = new AcademicBuilding("B2", 280, 150, "Sci1", 24, 120, 360, 850, 1025, 1200);
+  makeFaculty(tiles[26], tiles[27], tiles[29]);
   tiles[30] = new Unownable("GO TO TIMES");
   tiles[31] = new AcademicBuilding("EIT", 300, 200, "Sci2", 26, 130, 390, 900, 1100, 1275);
   tiles[32] = new AcademicBuilding("ESC", 300, 200, "Sci2", 26, 130, 390, 900, 1100, 1275);
   tiles[33] = new Unownable("SLC");
   tiles[34] = new AcademicBuilding("C2", 320, 200, "Sci2", 28, 150, 450, 1000, 1200, 1400);
+  makeFaculty(tiles[31], tiles[32], tiles[34]);
   tiles[35] = new Residence("REV");
   tiles[36] = new Unownable("NEEDLES HALL");
   tiles[37] = new AcademicBuilding("MC", 350, 200, "Math", 35, 175, 500, 1100, 1300, 1500);
   tiles[38] = new Unownable("COOP FEE");
   tiles[39] = new AcademicBuilding("DC", 400, 200, "Math", 50, 200, 600, 1400, 1700, 2000);
+  makeFaculty(tiles[37], tiles[39], NULL);
   td = new TextDisplay();
   currentPlayerIndex = 0;
   currentPlayer = NULL;

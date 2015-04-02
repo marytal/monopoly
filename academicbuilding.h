@@ -23,6 +23,7 @@ class AcademicBuilding : public Ownable {
 		void improve(void);
 		void unimprove(void);
 		int getImprovementPrice(void);
+		void addFaculty(AcademicBuilding *first, AcademicBuilding *second);
 
 };
 #endif
