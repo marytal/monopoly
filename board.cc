@@ -29,31 +29,43 @@ void Board::auction(BoardTile *tile){
   // what if no one bids??? Undefined behaviour? No one gets the property?
 
   int _currentPlayerIndex = currentPlayerIndex + 1;
-  Player **bidders = players; // how to copy the array of players to the heap...
+   // how to copy the array of players to the heap...
   int highest_bid = 1;
   int player_bid = 0;
   int playersInRunning = numPlayers;
+  string bidders [8];
   string player_input;
   cout << "Let's start the bidding." << endl;
 
+  for(int i = 0; i < numPlayers; i++){
+    if(players[i] == NULL){
+      bidders[i] = "";
+    } else {
+      bidders[i] = players[i]->getName();
+    }
+  }
 
   while(true){
+
+    if(_currentPlayerIndex == 8){
+      _currentPlayerIndex = 0;
+    }
 
     if(playersInRunning == 1){
       _currentPlayerIndex--;
       break;
     }
 
-    if(bidders[_currentPlayerIndex] != NULL){
+    if(bidders[_currentPlayerIndex] != ""){
 
-      cout << bidders[_currentPlayerIndex]->getName() << ", the current bid is at $" << highest_bid << 
+      cout << bidders[_currentPlayerIndex] << ", the current bid is at $" << highest_bid << 
       ". Input an integer higher than the current bid or enter 'w' to withddraw." << endl;
       cin >> player_input;
       stringstream ss(player_input);
       if(ss >> player_bid){
         if(player_bid <= highest_bid){
           cout << "That is not a valid bid. You are withdrawn for being silly." << endl;
-          bidders[_currentPlayerIndex] = NULL;
+          bidders[_currentPlayerIndex] = "";
           playersInRunning--;
         } else {
           highest_bid = player_bid;
@@ -61,7 +73,7 @@ void Board::auction(BoardTile *tile){
         }
       } else {
         cout << "Very well, your loss." << endl;
-        bidders[_currentPlayerIndex] = NULL;
+        bidders[_currentPlayerIndex] = "";
         playersInRunning--;
       }
 
