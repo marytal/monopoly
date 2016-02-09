@@ -1,0 +1,191 @@
+
+Total: ______________/66
+
+Bonus: ______________/10
+
+General: __/4
+
+_X_ Program includes a Makefile
+
+_X_ Program compiles and runs
+
+_X_ Program displays initial board
+
+_X_ Dice rolls are randomized
+
+Starting New Game: __/2
+
+_X_ All players start on OSAP square
+
+_X_ All players start with $1500 and no properties
+
+Command Line Arguments: __/3
+
+_X_ -testing: player can specify the two dice which are rolled
+
+_X_ -load filename: filename is a load file as described in the specifications.
+       Using this command, starts a game based on this file
+
+_X_ Arguments can be be given in any order
+
+THE FOLLOWING WILL NOT BE MARKED IF A LOAD FILE CANNOT BE READ AS A COMMAND LINE
+ARGUMENT
+__________________________________________________________________________________
+
+Starting Load Game: __/3
+
+_X_ All players start on square given in file
+
+_X_ All players start with properties given in file
+
+___ Player that starts in Jail must leave Jail through valid means
+
+Turn: __/7
+
+_X_ Rolls dice, numbers printed to screen
+
+_X_ Player is given opportunity to buy unowned property they land on
+
+_X_ Player plays tuition when landing on a square owned by another player
+
+_X_ Quit command to end game
+
+_X_ Save command to save details of current game to a file
+
+_X_ Cannot end turn (next) if player is eligible to roll
+
+_X_ Assets command for printing player stats to the screen (what is printed
+will vary, should include money and properties as a minimum)
+
+
+Trading: __/8
+
+_X_ Player can propose a trade to any other player
+
+_X_ Player can offer money for trade
+
+_X_ Player can offer property for trade
+
+_X_ Player can request money for trade
+
+_X_ Player can request property for trade
+
+_X_ Proposed trade can be accepted and rejected
+
+___ Player cannot trade property with improvements
+
+___ Player cannot trade property if a property in its monopoly has improvements
+
+Improvements: __/3
+
+_X_ Player can buy improvements if monopoly is owned on a property which is not
+a residence or a gym
+
+_X_ Player can sell improvements for half of their cost
+
+_X_ Player cannot buy improvements on residences and gyms
+
+Monopolies: __/4
+
+_X_ Tuition is doubled if monopoly is owned and property has no improvements
+(not residence/gym)
+
+_X_ Tuition is accurate for multiple residences being owned
+
+_X_ Tuition is accurate for multiple gyms being owned
+
+_X_ Tuition is accurate when property has improvements
+
+Player Movement: __/6
+
+(There should only ever be one token per player on the board regardless of movement type.)
+
+_X_ Player is moved on board through dice roll
+
+_X_ Player is moved on board through SLC Square
+
+_X_ Player is moved on board through Go to Tims Square
+
+_X_ Player is moved on board through Go to Jail in SLC card
+
+_X_ Player rolls again when doubles are rolled
+
+_X_ Player is moved to Tims after rolling 3 double in a row and does not first move to the
+square the roll would land them on
+
+Mortgages: __/3
+
+_X_ Player can mortgage property for half of its value
+
+_X_ Player can unmortgage property for mortgage value plus 10%
+
+_X_ Player cannot mortgage property if a property in the monopoly has a improvement
+
+Tims Line: __/5
+
+___ If player lands on Tims Line through rolling, they can leave on next turn
+
+(You will likely have to look at code for DC Tims cup unless the student has implemented
+loading with a Tim's cup)
+
+___ Player can leave Tims through Tims cup, money or rolling doubles
+
+___ Player must use a Tims cup or pay on third turn if they did not roll doubles (uses final
+roll)
+
+___ Tims Cup returned if used
+
+___ Max of 4 Tims Cups at a time
+
+SLC/Needles Hall: __/3
+
+_X_ When SLC is landed on, movement occurs correctly and is random (may need to check code)
+
+_X_ When Community Chest is landed on, money change follows given probabilities
+(may need to check code)
+
+_X_ Tims Cup is given 1% of the time instead of other actions (may need to check code)
+
+Non-Ownable Squares: __/5
+
+_X_ Goose Nesting: Nothing happens on Goose Nesting
+
+_X_ Tuition Square: Player chooses to pay 10% of net worth or $300
+
+_X_ Coop Fee: Player pays $150 dollars
+
+_X_ Collect OSAP: Player gains $200 when they land on OSAP
+
+_X_ Collect OSAP: Player gains $200 when they land pass over
+
+Auctions: __/4
+
+_X_ An auction begins when a player declines buying a property
+
+___ An auction for each property occurs when a player goes bankrupt
+      to the bank
+
+_X_ An auction continues until all except one player has withdrawn
+
+_X_ A player cannot successfully underbid another player in an auction
+
+Bankrupt: __/3
+
+___ Player give assets to a player if they go bankrupt to a player
+
+___ Player receiving properties must pay 10% of the mortgage value of each mortgaged property
+(may pay to unmortgage as well)
+
+___ If a player does not unmortgage a property they receive through bankruptcy immediately,
+they must pay 10% again to unmortgage it later 
+
+Ending the Game: __/3
+
+___ Game continues until only one player is remaing
+
+_X_ Program leaks no more than a modest amount of memory (aside from C++ libraries)
+
+___ Program leaks no memory
+
+Bonus: (be descriptive and indicate level of difficulty between
+				1 - easy and 10 - very difficult):

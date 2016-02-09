@@ -10,6 +10,7 @@ class Residence : public Ownable {
 	public:
 	Residence(std::string name);
 	int rent();
+	void setResidencies(Residence *rez1, Residence *rez2, Residence *rez3);
 };
 
 #endif

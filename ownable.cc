@@ -26,10 +26,10 @@ void Ownable::unmortgage(void) {
 int Ownable::getPurchasePrice(void) {
 	return purchasePrice;
 }
-
+/*
 string Ownable::getName(void) {
   return name; // not working..
 }
+*/
 
-
-	
+Ownable::~Ownable(void) {};	

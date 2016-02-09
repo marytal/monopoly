@@ -3,21 +3,25 @@
 #include <string>
 #include "ownable.h"
 
-using namespace std;
+using std::string;
+using std::cout;
+using std::endl;
+using std::cin;
 
 class Player {
 	private:
+		int index; // Tims rool up the rim cups
+// An integer from 0 to 3 ....... idk (turns left in jail)
+		int currentRoll;
+	public:
+		int jailtime; // change later
 		string name;
 		int cash;
-		int index;
+		char symbol;
 		int position;
-		int cups; // Tims rool up the rim cups
-		int jailtime; // An integer from 0 to 3 ....... idk (turns left in jail)
-		int currentRoll;
+		int cups;
 		Ownable *ownedProperties[28];
 		int numOwned;
-		char symbol;
-	public:
 		void changeBalance(int value); // is this useuful? 
 		bool canPay(int value);
 		//void bankrupt();
@@ -27,6 +31,7 @@ class Player {
 		string getName(void);
 		void printAssets(void);
 		Player(string name, char symbol);
+		Player(string name, char symbol, int cash, int cups, int position);
 		int getRoll(void);
 		int getIndex(void);
 		void setIndex(int newIndex);
@@ -34,6 +39,8 @@ class Player {
 		int getPos(void);
 		char getSymbol(void);
 		int getBalance(void);
+		void printProperties(void);
+		
 };
 
 #endif

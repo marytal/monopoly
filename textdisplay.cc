@@ -92,9 +92,9 @@ void TextDisplay::improve(int tile) {
 	int y = tileRowMap[tile] - 3;
 	int x = tileColMap[tile] + houses[tile];
 	if(houses[tile] == 4) {
-		theDisplay[y][x] = '@';
+		theDisplay[y][x] = 'I';
 	} else {
-		theDisplay[y][x] = '&';
+		theDisplay[y][x] = 'I';
 	}
 	houses[tile]++;
 }

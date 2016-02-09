@@ -9,6 +9,11 @@ Player::Player(string name, char symbol) :	name(name),
 											currentRoll(0), 
 											numOwned(0) {}
 
+
+Player::Player(string name, char symbol, int cash, int cups, int position): name(name), symbol(symbol), cash(cash), position(position) {};
+
+// An interesting constructor, which raises some nice questions.
+
 void Player::changeBalance(int value){
   cash += value;
 }
@@ -68,10 +73,24 @@ int Player::netWorth(){
   return networth / 10;
 }
 
+void Player::printProperties(void){
+  for(int i = 0; i < 28; i++){
+    if(ownedProperties[i] != NULL){
+      cout << "Properties: " << ownedProperties[i]->getName() << endl;
+    }
+  }
+}
+
 void Player::printAssets(void) {
-	cout << name << " ";
-	cout << cash << " ";
-	cout << symbol << endl;
+	cout << endl;
+	cout << "Player Name:  " << name << endl;
+	cout << "Player token: " << symbol << endl;
+	cout << "Cash:         " << cash << endl;
+//  printProperties();
+
+//    for(int i = 0; i < numOwned; i++) {
+//		cout << "    " << ownedProperties[i]->getName() << endl; 
+//	}	
 }
 
 int Player::getBalance(void) {

@@ -28,15 +28,49 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	
-	Game g;
+	cout << "Are you ready to play?" << endl;
+	string input;
+	if(!(cin >> input)) {
+		return 0;
+	}
 
+	Game g;
+	bool loaded;
 	string readfile;
 	string myfile;
+
+	int args = argc;
+	int i = 1;
+
+	string myArg;
+	while(args > 1) {			// While loop to allow any order of command line arguments
+		myArg = argv[i];
+		if(myArg == "-load") {
+			cout << "loading file... " << endl;
+			g.loadFile(argv[i + 1]);
+			loaded = true;
+			args--;
+			args--;
+			i++;
+			i++;
+		} else if(myArg == "-testing") {
+			cout << "Testing mode enabled" << endl;
+			g.testingON();
+			args--;
+			i++;
+		}
+	}
+
+	if(argc == 1) {
+		cout << "No arguments read - starting game." << endl;		// starts new game. 
+	}
+	/*
 	if(argc > 1) {
 		string firstArg = argv[1];
 		if(firstArg == "-load") {
 			cout << "loading file... " << endl;
 			g.loadFile(argv[2]);
+			loaded = true;
 		} else if (firstArg == "-testing") {
 			cout << "Testing mode enabled" << endl;
 			g.testingON();
@@ -47,7 +81,10 @@ int main(int argc, char* argv[]) {
 	} else {
 		cout << "No arguments read - starting game" << endl;
 	}
-	g.initPlayers();	
+*/
+	if(!loaded) {
+		g.initPlayers();	
+	}
 	g.runGame();
 
 
@@ -57,7 +94,8 @@ int main(int argc, char* argv[]) {
 	while(getline(cin, fullCommand)) {
 		g.getCommand(fullCommand);
 	}
-*/
+*/	
+
 	cout << "Program finished without errors." << endl;
 	return 0;
 }

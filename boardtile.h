@@ -9,7 +9,7 @@ class BoardTile {
 		std::string name;
 		bool ownable;
     BoardTile(std::string name, bool ownable);
-
+	std::string getName(void);
     virtual int getPurchasePrice(); // queestiooon
 };
 

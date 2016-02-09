@@ -6,14 +6,13 @@
 
 class Gym : public Ownable {
 	private:
-		std::string name;
 		bool owned;
-		int owner;
+		// owner;
 		Gym *otherGym;
 	public:
 		Gym(std::string name);
 		int rent();
-	
+		void setOtherGym(Gym *otherGym);
 };
 
 #endif

@@ -2,9 +2,10 @@
 
 using namespace std;
 
-Residence::Residence(string name) : Ownable(name, 100) {}; // how much do the residences cost?
+Residence::Residence(string name) : Ownable(name, 200) {}; // how much do the residences cost?
 
 int Residence::rent(){
+	cout << "Made it to: Rent Function in Residences" << endl;
 	//. do stuff
 	int count = 0;
 	int rent = 25;
@@ -17,4 +18,10 @@ int Residence::rent(){
 	}
 
 	return rent;
+}
+
+void Residence::setResidencies(Residence *rez1, Residence *rez2, Residence *rez3) {
+	otherResidences[0] = rez1;
+	otherResidences[1] = rez2;
+	otherResidences[2] = rez3;
 }

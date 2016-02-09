@@ -8,17 +8,20 @@
 
 class AcademicBuilding : public Ownable {
 	private:
-		int improvements;
-		int improvementPrice;
-		int purchasePrice;
+//		int improvementPrice;
+//		int purchasePrice;
 		std::string faculty;
 		int rent_array[7];
 	public:
+		int improvementPrice;
+		int purchasePrice;
+		int improvements;
+		int tileNum;
 		AcademicBuilding *facultyMembers[3];
 		void notify(TextDisplay *td);
 		bool isMonopoly();
 //  AcademicBuilding(std::string name, int purchasePrice, int improvementPrice, std::string faculty, int rent[7]);
-		AcademicBuilding(std::string name, int purchasePrice, int improvementPrice, std::string faculty, int rentBase, int rent1, int rent2, int rent3, int rent4, int rent5);
+		AcademicBuilding(std::string name, int tileNum, int purchasePrice, int improvementPrice, std::string faculty, int rentBase, int rent1, int rent2, int rent3, int rent4, int rent5);
 		int rent();
 		void improve(void);
 		void unimprove(void);
